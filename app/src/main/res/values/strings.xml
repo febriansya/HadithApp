@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GoHadist</string>
+    <string name="name_app">GoHadist App</string>
+    <string name="splash_description">Learn hadist and \n Recite once everyday</string>
+    <string name="get_started">Get Started</string>
+    <string name="home">home</string>
+</resources>
