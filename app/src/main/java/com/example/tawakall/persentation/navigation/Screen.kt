@@ -8,7 +8,7 @@ sealed class Screen(val route: String) {
     object Doa : Screen("doa")
     object Bookmark : Screen("bookmark")
 
-//    object DetailReward : Screen("home/{rewardId}") {
-//        fun createRoute(rewardId: Long) = "home/$rewardId"
-//    }
+    object Detail:Screen("detail/{number}/{arab}/{id}")
+
+
 }

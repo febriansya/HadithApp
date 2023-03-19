@@ -11,10 +11,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.tawakall.R
 import com.example.tawakall.persentation.screen.home.component.CardRecentRead
 import com.example.tawakall.persentation.screen.home.component.ViewTabPager
@@ -22,11 +26,13 @@ import com.example.tawakall.persentation.screen.home.component.ViewTabPager
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeScreenViewModel = hiltViewModel()
+    viewModel: HomeScreenViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     var searchQuery by remember { mutableStateOf("") }
     var isSearchExpanded by remember { mutableStateOf(false) }
     val state = viewModel.state.value
+
     Scaffold(
         modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp),
         topBar = {
@@ -109,8 +115,7 @@ fun HomeScreen(
                 )
             }
             CardRecentRead()
-            Spacer(modifier = modifier.height(24.dp))
-            ViewTabPager(state, state)
+            ViewTabPager(state, state, LocalContext.current, navController)
         }
     }
 }

@@ -22,6 +22,7 @@ import com.example.tawakall.R
 import com.example.tawakall.persentation.navigation.NavigationItem
 import com.example.tawakall.persentation.navigation.Screen
 import com.example.tawakall.persentation.screen.bookmark.BookmarkScreen
+import com.example.tawakall.persentation.screen.detail.DetailScreen
 import com.example.tawakall.persentation.screen.doa.DoaScreen
 import com.example.tawakall.persentation.screen.favorite.FavoriteScreen
 import com.example.tawakall.persentation.screen.home.HomeScreen
@@ -33,11 +34,16 @@ fun HadistApp(
     modifier: Modifier = Modifier,
     navHostController: NavHostController = rememberNavController()
 ) {
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(
-                navController = navHostController
-            )
+            if (currentRoute != Screen.Detail.route) {
+                BottomBar(
+                    navController = navHostController
+                )
+            }
         }
 
     ) { innerPadding ->
@@ -47,7 +53,7 @@ fun HadistApp(
             modifier = modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navController = navHostController)
             }
 
             composable(Screen.Light.route) {
@@ -64,6 +70,13 @@ fun HadistApp(
 
             composable(Screen.Bookmark.route) {
                 BookmarkScreen()
+            }
+            composable(Screen.Detail.route) { backStackEntry ->
+                val arguments = requireNotNull(backStackEntry.arguments)
+                val number = requireNotNull(arguments.getString("number"))
+                val arab = requireNotNull(arguments.getString("arab"))
+                val id = requireNotNull(arguments.getString("id"))
+                DetailScreen(nomor = number, arab = arab, terjemahan = id)
             }
         }
     }

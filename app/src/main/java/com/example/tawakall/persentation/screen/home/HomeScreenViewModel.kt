@@ -17,8 +17,23 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     private val getHadithUseCase: GetHadithUseCase
 ) : ViewModel() {
+//    hadist abu daud
     private val _state = mutableStateOf(HadithListState())
     val state: State<HadithListState> = _state
+
+//  hadist bukhari
+
+
+//    Tirmidzi
+//    Nasai
+//    Ibnu Majah
+//    Ahmad
+//    Darimi
+//    Malik
+
+
+
+
     private var riwayah:String =""
 
     init {
@@ -32,6 +47,11 @@ class HomeScreenViewModel @Inject constructor(
                     val hadistList = result.data
                     _state.value =
                         HadithListState(hadith = result.data as List<Hadith>)
+
+
+
+
+
                 }
                 is Resource.Error -> {
                     _state.value =

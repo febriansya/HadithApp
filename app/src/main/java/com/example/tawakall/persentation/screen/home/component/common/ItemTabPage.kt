@@ -1,6 +1,7 @@
 package com.example.tawakall.persentation.screen.home.component.common
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.tawakall.R
 
 @Composable
@@ -22,13 +24,18 @@ fun ItemTabPage(
     modifier: Modifier = Modifier,
     nomor: Int,
     title: String,
-    arab: String
+    arab: String,
+    navController: NavController,
+    onClick: () -> Unit,
+
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
             .padding(12.dp)
+            .clickable(onClick = onClick)
     ) {
         Box(
             contentAlignment = Alignment.Center
@@ -45,7 +52,8 @@ fun ItemTabPage(
         }
         Spacer(modifier = Modifier.width(16.dp))
         Column(
-            modifier = modifier.weight(1f)
+            modifier = modifier
+                .weight(1f)
                 .fillMaxWidth()
         ) {
 
@@ -83,11 +91,5 @@ fun ItemTabPage(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun PrevieCoy() {
-    ItemTabPage(nomor = 2, title = "teste", arab = "eteate")
 }
 
