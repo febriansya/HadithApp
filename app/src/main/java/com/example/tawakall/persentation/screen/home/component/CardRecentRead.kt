@@ -61,8 +61,8 @@ fun CardRecentRead(
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "Al-Fatihah", style = MaterialTheme.typography.h2, color = Color.White)
-                Text(text = "Ayah No:1", style = MaterialTheme.typography.body1, color = Color.White)
+                Text(text = "Bukhari", style = MaterialTheme.typography.h2, color = Color.White)
+                Text(text = "No. 1", style = MaterialTheme.typography.body1, color = Color.White)
             }
             Image(
                 painter = painterResource(id = R.drawable.quran),

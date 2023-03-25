@@ -25,6 +25,7 @@ fun ItemTabPage(
     nomor: Int,
     title: String,
     arab: String,
+    author:String,
     navController: NavController,
     onClick: () -> Unit,
 
@@ -61,17 +62,17 @@ fun ItemTabPage(
                 horizontalArrangement = Arrangement.spacedBy(7.dp)
             ) {
                 Text(
-                    text = "MECCAN",
+                    text = author,
                     style = MaterialTheme.typography.subtitle2,
                     fontSize = 12.sp,
                     color = Color.LightGray
                 )
-                Text(
-                    text = "7 VERSES",
-                    style = MaterialTheme.typography.subtitle2,
-                    fontSize = 12.sp,
-                    color = Color.LightGray
-                )
+//                Text(
+//                    text = "7 VERSES",
+//                    style = MaterialTheme.typography.subtitle2,
+//                    fontSize = 12.sp,
+//                    color = Color.LightGray
+//                )
             }
             Text(
                 text = arab,

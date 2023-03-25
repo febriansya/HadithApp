@@ -1,6 +1,7 @@
 package com.example.tawakall.persentation.ui.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -16,6 +17,10 @@ val Poppins = FontFamily(
     Font(R.font.poppins_medium, FontWeight.Medium),
     Font(R.font.poppins_bold, FontWeight.Bold),
     Font(R.font.poppins_semibold, FontWeight.SemiBold)
+)
+
+val Amiri = FontFamily(
+    Font(R.font.amiri, FontWeight.Normal)
 )
 
 
@@ -51,7 +56,12 @@ val Typography = Typography(
         fontSize = 14.sp
     ),
 
-
+    caption = TextStyle(
+        fontFamily = Amiri,
+        fontWeight = FontWeight.Normal,
+        fontSize = 25.sp,
+        color = Color(0xff240F4F)
+    )
 
 
     /* Other default text styles to override

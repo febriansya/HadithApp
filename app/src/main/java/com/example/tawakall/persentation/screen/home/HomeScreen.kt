@@ -1,7 +1,8 @@
 package com.example.tawakall.persentation.screen.home
 
-import android.util.Log
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -11,14 +12,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.tawakall.R
 import com.example.tawakall.persentation.screen.home.component.CardRecentRead
 import com.example.tawakall.persentation.screen.home.component.ViewTabPager
@@ -26,12 +24,13 @@ import com.example.tawakall.persentation.screen.home.component.ViewTabPager
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeScreenViewModel = hiltViewModel(),
+    bukhari: GetHadistViewModel = hiltViewModel(),
     navController: NavController
 ) {
+
     var searchQuery by remember { mutableStateOf("") }
     var isSearchExpanded by remember { mutableStateOf(false) }
-    val state = viewModel.state.value
+    val newState = bukhari.state.value
 
     Scaffold(
         modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp),
@@ -96,7 +95,6 @@ fun HomeScreen(
                         }
                     }
                 )
-
             }
         }
     ) { paddingValues ->
@@ -115,7 +113,10 @@ fun HomeScreen(
                 )
             }
             CardRecentRead()
-            ViewTabPager(state, state, LocalContext.current, navController)
+            ViewTabPager(
+                newState,
+                navController
+            )
         }
     }
 }

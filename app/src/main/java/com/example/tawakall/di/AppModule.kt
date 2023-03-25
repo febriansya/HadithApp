@@ -1,8 +1,8 @@
 package com.example.tawakall.di
 
 import com.example.tawakall.common.Constants
-import com.example.tawakall.data.remote.HadithApi
-import com.example.tawakall.data.repository.HadithRepositroyImpl
+import com.example.tawakall.persentation.screen.data.remote.HadithApi
+import com.example.tawakall.persentation.screen.data.repository.HadithRepositroyImpl
 import com.example.tawakall.domain.repository.HadithRepository
 import dagger.Module
 import dagger.Provides

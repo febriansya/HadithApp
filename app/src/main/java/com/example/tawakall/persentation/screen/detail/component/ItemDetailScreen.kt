@@ -11,10 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tawakall.R
+
 
 @Composable
 fun ItemDetailScreen(
@@ -23,6 +25,7 @@ fun ItemDetailScreen(
     arab: String,
     terjemahan: String
 ) {
+
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
@@ -84,9 +87,10 @@ fun ItemDetailScreen(
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = arab,
-            fontSize = 18.sp,
+            color = Color(0xff240F4F),
             modifier = modifier.align(Alignment.End),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.End,
+            style = MaterialTheme.typography.caption
         )
         Text(
             text = terjemahan,

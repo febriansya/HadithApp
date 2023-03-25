@@ -1,4 +1,4 @@
-package com.example.tawakall.data.remote.dto
+package com.example.tawakall.persentation.screen.data.remote.dto
 
 data class Hadith(
     val number:Int,
