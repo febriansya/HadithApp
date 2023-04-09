@@ -1,6 +1,5 @@
 package com.example.tawakall.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.tawakall.common.Constants
@@ -9,6 +8,9 @@ import com.example.tawakall.data.source.local.dao.HadithDao
 import com.example.tawakall.data.source.remote.HadithApi
 import com.example.tawakall.data.source.repository.HadithRepositroyImpl
 import com.example.tawakall.domain.repository.HadithRepository
+import com.example.tawakall.domain.use_case.GetLastHaditUseCase
+import com.example.tawakall.domain.use_case.InsertHadithUseCase
+import com.example.tawakall.domain.use_case.RoomUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,8 +35,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideHadithRepository(api: HadithApi,dao: HadithDao): HadithRepository {
-        return HadithRepositroyImpl(api,dao)
+    fun provideHadithRepository(api: HadithApi, dao: HadithDao): HadithRepository {
+        return HadithRepositroyImpl(api, dao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUseCaseRoom(
+        repository: HadithRepository
+    ): RoomUseCase {
+        return RoomUseCase(InsertHadithUseCase(repository), GetLastHaditUseCase(repository))
     }
 
 
@@ -45,7 +55,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDao(db: DatabaseHadith):HadithDao{
+    fun provideDao(db: DatabaseHadith): HadithDao {
         return db.hadithDao()
     }
 }

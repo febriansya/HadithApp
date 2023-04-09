@@ -5,14 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tawakall.domain.model.ReadHadith
-import com.example.tawakall.domain.use_case.insert.InsertHadithUseCase
+import com.example.tawakall.domain.use_case.InsertHadithUseCase
+import com.example.tawakall.domain.use_case.RoomUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailVIewModel @Inject constructor(
-    private val insertHadithUseCase: InsertHadithUseCase
+    private val roomUseCase: RoomUseCase
 ) : ViewModel() {
 
 //    berhasil add data ui state
@@ -23,7 +24,7 @@ class DetailVIewModel @Inject constructor(
 
     fun insertRead(readHadith: ReadHadith){
         scope.launch {
-            insertHadithUseCase.invoke(readHadith)
+            roomUseCase.insertHadithUseCase.invoke(readHadith)
         }
     }
 
