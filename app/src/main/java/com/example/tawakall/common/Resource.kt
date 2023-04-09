@@ -1,6 +1,6 @@
 package com.example.tawakall.common
 
-import com.example.tawakall.persentation.screen.data.remote.dto.Hadith
+import com.example.tawakall.data.source.remote.dto.Hadith
 
 sealed class Resource<T>(val data: Any? = null, val message: String? = null) {
     class Success<T>(data: Any) : Resource<T>(data)

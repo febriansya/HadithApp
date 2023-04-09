@@ -86,7 +86,7 @@ fun ItemTabPage(
             Text(
                 text = title,
                 style = MaterialTheme.typography.subtitle2,
-                fontSize = 16.sp,
+                fontSize = 13.sp,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2
             )

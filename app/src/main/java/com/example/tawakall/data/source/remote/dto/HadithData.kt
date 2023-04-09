@@ -1,4 +1,4 @@
-package com.example.tawakall.persentation.screen.data.remote.dto
+package com.example.tawakall.data.source.remote.dto
 
 data class HadithData(
     val name: String? = null,

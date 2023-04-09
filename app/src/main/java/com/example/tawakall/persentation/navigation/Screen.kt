@@ -7,5 +7,5 @@ sealed class Screen(val route: String) {
     object Doa : Screen("doa")
     object Bookmark : Screen("bookmark")
 
-    object Detail:Screen("detail/{number}/{arab}/{id}")
+    object Detail:Screen("detail/{number}/{arab}/{id}/{riwayah}")
 }

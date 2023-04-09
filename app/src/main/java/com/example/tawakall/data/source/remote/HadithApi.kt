@@ -1,7 +1,7 @@
-package com.example.tawakall.persentation.screen.data.remote
+package com.example.tawakall.data.source.remote
 
 
-import com.example.tawakall.persentation.screen.data.remote.dto.HadistResponse
+import com.example.tawakall.data.source.remote.dto.HadistResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tawakall.R
@@ -23,7 +24,8 @@ fun ItemDetailScreen(
     modifier: Modifier = Modifier,
     nomor: String,
     arab: String,
-    terjemahan: String
+    terjemahan: String,
+    click: () -> Unit
 ) {
 
     Column(
@@ -67,7 +69,7 @@ fun ItemDetailScreen(
                 IconButton(onClick = { /*TODO*/ }, modifier = modifier.weight(1f)) {
 
                 }
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = click) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_bookmark),
                         contentDescription = null,
@@ -100,4 +102,3 @@ fun ItemDetailScreen(
         )
     }
 }
-

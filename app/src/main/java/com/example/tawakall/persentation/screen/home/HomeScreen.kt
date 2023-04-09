@@ -114,7 +114,7 @@ fun HomeScreen(
             }
             CardRecentRead()
             ViewTabPager(
-                newState,
+                viewModel= bukhari,
                 navController
             )
         }

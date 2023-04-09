@@ -1,7 +1,7 @@
 package com.example.tawakall.persentation.screen.home
 
-import com.example.tawakall.persentation.screen.data.remote.dto.Hadith
-import com.example.tawakall.persentation.screen.data.remote.dto.HadithData
+import com.example.tawakall.data.source.remote.dto.Hadith
+import com.example.tawakall.data.source.remote.dto.HadithData
 
 
 data class HadithListState(
@@ -9,5 +9,4 @@ data class HadithListState(
     val hadith: List<Hadith> = emptyList(),
     val error: String = "",
     val riwayah: HadithData? = null
-
 )

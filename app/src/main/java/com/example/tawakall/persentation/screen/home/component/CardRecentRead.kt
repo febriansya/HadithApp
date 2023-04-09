@@ -20,7 +20,8 @@ import com.example.tawakall.persentation.ui.theme.Shapes
 
 @Composable
 fun CardRecentRead(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+
 ) {
     Column(
         modifier = modifier

@@ -4,13 +4,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -19,23 +22,29 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tawakall.R
+import com.example.tawakall.domain.model.ReadHadith
 import com.example.tawakall.persentation.navigation.NavigationItem
 import com.example.tawakall.persentation.navigation.Screen
 import com.example.tawakall.persentation.screen.bookmark.BookmarkScreen
 import com.example.tawakall.persentation.screen.detail.DetailScreen
+import com.example.tawakall.persentation.screen.detail.DetailVIewModel
 import com.example.tawakall.persentation.screen.doa.DoaScreen
 import com.example.tawakall.persentation.screen.favorite.FavoriteScreen
 import com.example.tawakall.persentation.screen.home.HomeScreen
 import com.example.tawakall.persentation.screen.remember.RememberScreen
 import com.example.tawakall.persentation.ui.theme.Shapes
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun HadistApp(
     modifier: Modifier = Modifier,
-    navHostController: NavHostController = rememberNavController()
+    navHostController: NavHostController = rememberNavController(),
+    vIewModel: DetailVIewModel = hiltViewModel()
 ) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+    val current = LocalContext.current
 
     Scaffold(
         bottomBar = {
@@ -76,7 +85,16 @@ fun HadistApp(
                 val number = requireNotNull(arguments.getString("number"))
                 val arab = requireNotNull(arguments.getString("arab"))
                 val id = requireNotNull(arguments.getString("id"))
-                DetailScreen(nomor = number, arab = arab, terjemahan = id)
+                val riwayah = requireNotNull(arguments.getString("riwayah"))
+
+                val scope = rememberCoroutineScope()
+
+                DetailScreen(nomor = number, arab = arab, terjemahan = id, onClickedFavorite = {
+                    val read = ReadHadith(riwayah, number)
+                    scope.launch(Dispatchers.IO) {
+                        vIewModel.insertRead(read)
+                    }
+                })
             }
         }
     }

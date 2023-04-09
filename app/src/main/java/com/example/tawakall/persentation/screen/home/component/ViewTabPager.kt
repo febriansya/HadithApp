@@ -1,7 +1,5 @@
 package com.example.tawakall.persentation.screen.home.component
 
-import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tawakall.persentation.screen.home.GetHadistViewModel
-import com.example.tawakall.persentation.screen.home.HadithListState
 import com.example.tawakall.persentation.screen.home.component.common.ItemTabPage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -28,11 +26,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ViewTabPager(
-    state: HadithListState,
+    viewModel: GetHadistViewModel,
     navController: NavController
 ) {
-    val scope = rememberCoroutineScope()
-    val pagerState = rememberPagerState()
     val pages = listOf<String>(
         "Abu Daud",
         "Bukhari",
@@ -44,7 +40,12 @@ fun ViewTabPager(
         "Malik",
         "Muslim"
     )
-
+    val scope = rememberCoroutineScope()
+    val pagerState = rememberPagerState()
+    LaunchedEffect(pagerState.currentPage) {
+        viewModel.getAllNewHadist(pagerState.currentPage)
+    }
+    val state = viewModel.state.value
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -77,21 +78,19 @@ fun ViewTabPager(
                     })
             }
         }
-        if (state.isLoading) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-        } else {
+        if (!state.isLoading) {
             HorizontalPager(
                 count = pages.size,
                 modifier = Modifier.fillMaxSize(),
                 state = pagerState
             ) { page ->
                 when (page) {
+
                     0 -> {
                         LazyColumn {
                             state.riwayah?.let {
                                 items(it.hadiths) { hadith ->
+                                    val riwayah = state.riwayah?.name.toString()
                                     ItemTabPage(
                                         nomor = hadith.number,
                                         title = hadith.id,
@@ -99,7 +98,7 @@ fun ViewTabPager(
                                         author = state.riwayah?.name.toString(),
                                         navController = navController
                                     ) {
-                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}")
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
                                     }
                                 }
                             }
@@ -108,6 +107,7 @@ fun ViewTabPager(
                     1 -> {
                         LazyColumn {
                             state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
                                 items(it.hadiths) { hadith ->
                                     ItemTabPage(
                                         nomor = hadith.number,
@@ -116,13 +116,148 @@ fun ViewTabPager(
                                         author = state.riwayah?.name.toString(),
                                         navController = navController
                                     ) {
-                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}")
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
                                     }
                                 }
                             }
                         }
                     }
+                    2 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
+                                items(it.hadiths) { hadith ->
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    3 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
+                                items(it.hadiths) { hadith ->
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    4 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
+                                items(it.hadiths) { hadith ->
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    5 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
+                                items(it.hadiths) { hadith ->
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    6 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                items(it.hadiths) { hadith ->
+                                    val riwayah = state.riwayah?.name.toString()
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    7 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
+                                items(it.hadiths) { hadith ->
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    8 -> {
+                        LazyColumn {
+                            state.riwayah?.let {
+                                val riwayah = state.riwayah?.name.toString()
+                                items(it.hadiths) { hadith ->
+                                    ItemTabPage(
+                                        nomor = hadith.number,
+                                        title = hadith.id,
+                                        arab = hadith.arab,
+                                        author = state.riwayah?.name.toString(),
+                                        navController = navController
+                                    ) {
+                                        navController.navigate("detail/${hadith.number}/${hadith.arab}/${hadith.id}/${riwayah}")
+                                    }
+                                }
+                            }
+                        }
+
+                    }
                 }
+            }
+        } else {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
             }
         }
     }
