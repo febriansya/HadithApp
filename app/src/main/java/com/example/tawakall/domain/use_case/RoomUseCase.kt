@@ -5,5 +5,6 @@ import javax.inject.Inject
 
 data class RoomUseCase @Inject constructor (
     val insertHadithUseCase: InsertHadithUseCase,
-    val getLastHadithUseCase: GetLastHaditUseCase
+    val getLastHadithUseCase: GetLastHadithUseCase,
+    val fetchHadistUseCaseApi: FetchHadistUseCaseApi
 )

@@ -3,9 +3,10 @@ package com.example.tawakall.data.source.repository
 import com.example.tawakall.data.source.local.dao.HadithDao
 import com.example.tawakall.data.source.remote.HadithApi
 import com.example.tawakall.data.source.remote.dto.Hadith
-import com.example.tawakall.domain.repository.HadithRepository
 import com.example.tawakall.data.source.remote.dto.HadithData
 import com.example.tawakall.domain.model.ReadHadith
+import com.example.tawakall.domain.repository.HadithRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class HadithRepositroyImpl @Inject constructor(
@@ -28,7 +29,7 @@ class HadithRepositroyImpl @Inject constructor(
         return response.data
     }
 
-    override suspend fun getLastRead(): List<ReadHadith> {
+    override  fun getLastRead():Flow<List<ReadHadith>> {
         return dao.getAll()
     }
 

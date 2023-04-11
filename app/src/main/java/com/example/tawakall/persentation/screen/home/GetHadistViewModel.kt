@@ -1,12 +1,15 @@
 package com.example.tawakall.persentation.screen.home
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tawakall.common.Resource
 import com.example.tawakall.data.source.remote.dto.HadithData
+import com.example.tawakall.domain.model.ReadHadith
 import com.example.tawakall.domain.use_case.FetchHadistUseCaseApi
+import com.example.tawakall.domain.use_case.RoomUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,15 +18,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GetHadistViewModel @Inject constructor(
-    private val useCaseNew: FetchHadistUseCaseApi,
+    private val useCaseNew: RoomUseCase,
 ) : ViewModel() {
 
     private val _state = mutableStateOf(HadithListState())
     val state: State<HadithListState> = _state
 
+
+
     fun getAllNewHadist(tabindex: Int) {
         when (tabindex) {
-            0 -> useCaseNew.invoke("abu-daud", "1-300").onEach { result ->
+            0 -> useCaseNew.fetchHadistUseCaseApi.invoke("abu-daud", "1-300").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -43,7 +48,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            1 -> useCaseNew.invoke("bukhari", "1-200").onEach { result ->
+            1 -> useCaseNew.fetchHadistUseCaseApi.invoke("bukhari", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -63,7 +68,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            2 -> useCaseNew.invoke("tirmidzi", "1-200").onEach { result ->
+            2 -> useCaseNew.fetchHadistUseCaseApi.invoke("tirmidzi", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -83,7 +88,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            3 -> useCaseNew.invoke("nasai", "1-200").onEach { result ->
+            3 -> useCaseNew.fetchHadistUseCaseApi.invoke("nasai", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -103,7 +108,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            4 -> useCaseNew.invoke("ibnu-majah", "1-200").onEach { result ->
+            4 -> useCaseNew.fetchHadistUseCaseApi.invoke("ibnu-majah", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -123,7 +128,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            5 -> useCaseNew.invoke("ahmad", "1-200").onEach { result ->
+            5 -> useCaseNew.fetchHadistUseCaseApi.invoke("ahmad", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -143,7 +148,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            6 -> useCaseNew.invoke("darimi", "1-200").onEach { result ->
+            6 -> useCaseNew.fetchHadistUseCaseApi.invoke("darimi", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -163,7 +168,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            7 -> useCaseNew.invoke("malik", "1-200").onEach { result ->
+            7 -> useCaseNew.fetchHadistUseCaseApi.invoke("malik", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -183,7 +188,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            8 -> useCaseNew.invoke("muslim", "1-200").onEach { result ->
+            8 -> useCaseNew.fetchHadistUseCaseApi.invoke("muslim", "1-200").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -203,7 +208,7 @@ class GetHadistViewModel @Inject constructor(
                     }
                 }
             }
-            else -> useCaseNew.invoke("muslim", "1-20").onEach { result ->
+            else -> useCaseNew.fetchHadistUseCaseApi.invoke("muslim", "1-20").onEach { result ->
                 val hadistList = result.data
                 when (result) {
                     is Resource.Success -> {
@@ -225,5 +230,11 @@ class GetHadistViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
+
+
+
+
+
 }
 

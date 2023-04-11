@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.tawakall.domain.model.ReadHadith
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HadithDao {
@@ -12,5 +13,5 @@ interface HadithDao {
     suspend fun insert(readHadith: ReadHadith)
 
     @Query("SELECT * FROM last")
-    fun getAll(): List<ReadHadith>
+    fun getAll(): Flow<List<ReadHadith>>
 }

@@ -8,7 +8,8 @@ import com.example.tawakall.data.source.local.dao.HadithDao
 import com.example.tawakall.data.source.remote.HadithApi
 import com.example.tawakall.data.source.repository.HadithRepositroyImpl
 import com.example.tawakall.domain.repository.HadithRepository
-import com.example.tawakall.domain.use_case.GetLastHaditUseCase
+import com.example.tawakall.domain.use_case.FetchHadistUseCaseApi
+import com.example.tawakall.domain.use_case.GetLastHadithUseCase
 import com.example.tawakall.domain.use_case.InsertHadithUseCase
 import com.example.tawakall.domain.use_case.RoomUseCase
 import dagger.Module
@@ -44,14 +45,17 @@ object AppModule {
     fun provideUseCaseRoom(
         repository: HadithRepository
     ): RoomUseCase {
-        return RoomUseCase(InsertHadithUseCase(repository), GetLastHaditUseCase(repository))
+        return RoomUseCase(InsertHadithUseCase(repository), GetLastHadithUseCase(repository),
+            FetchHadistUseCaseApi(repository)
+        )
     }
 
 
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext app: Context) =
-        Room.databaseBuilder(app, DatabaseHadith::class.java, "hadith_database").build()
+        Room.databaseBuilder(app, DatabaseHadith::class.java, "hadith_database")
+            .fallbackToDestructiveMigration().build()
 
     @Provides
     @Singleton

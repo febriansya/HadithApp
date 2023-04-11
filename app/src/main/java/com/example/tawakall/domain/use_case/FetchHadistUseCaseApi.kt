@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class FetchHadistUseCaseApi @Inject constructor(
+class FetchHadistUseCaseApi(
     private val repository: HadithRepository,
 ) {
     operator fun invoke(id: String, range: String): Flow<Resource<HadithData>> = flow {

@@ -3,6 +3,7 @@ package com.example.tawakall.domain.repository
 import com.example.tawakall.data.source.remote.dto.Hadith
 import com.example.tawakall.data.source.remote.dto.HadithData
 import com.example.tawakall.domain.model.ReadHadith
+import kotlinx.coroutines.flow.Flow
 
 
 interface HadithRepository {
@@ -10,7 +11,7 @@ interface HadithRepository {
     suspend fun getDataHadist(): HadithData
     suspend fun getHadistById(id: String, range: String): HadithData
 
-    suspend fun getLastRead(): List<ReadHadith>
+     fun getLastRead():Flow<List<ReadHadith>>
 
     suspend fun insertLastRead(readHadith: ReadHadith)
 }

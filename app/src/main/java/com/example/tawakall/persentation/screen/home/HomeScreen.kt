@@ -1,5 +1,7 @@
 package com.example.tawakall.persentation.screen.home
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,17 +22,23 @@ import androidx.navigation.NavController
 import com.example.tawakall.R
 import com.example.tawakall.persentation.screen.home.component.CardRecentRead
 import com.example.tawakall.persentation.screen.home.component.ViewTabPager
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     bukhari: GetHadistViewModel = hiltViewModel(),
+    viewModel: ReadLastViewModel = hiltViewModel(),
     navController: NavController
 ) {
 
     var searchQuery by remember { mutableStateOf("") }
     var isSearchExpanded by remember { mutableStateOf(false) }
-    val newState = bukhari.state.value
+
+    val last = viewModel.stateRead
+    Log.d("last", last.toString())
 
     Scaffold(
         modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp),
@@ -112,9 +120,9 @@ fun HomeScreen(
                     fontSize = 24.sp
                 )
             }
-            CardRecentRead()
+            CardRecentRead(viewModel = viewModel)
             ViewTabPager(
-                viewModel= bukhari,
+                viewModel = bukhari,
                 navController
             )
         }

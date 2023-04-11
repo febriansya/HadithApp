@@ -1,5 +1,7 @@
 package com.example.tawakall.persentation.screen.home.component
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,17 +14,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.tawakall.R
+import com.example.tawakall.persentation.screen.home.ReadLastViewModel
 import com.example.tawakall.persentation.ui.theme.Shapes
 
 @Composable
 fun CardRecentRead(
+    viewModel: ReadLastViewModel,
     modifier: Modifier = Modifier,
-
 ) {
+
+
+    val lastReade = viewModel.stateRead
+    Log.d("3", "$lastReade")
+
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -60,10 +70,34 @@ fun CardRecentRead(
                         color = Color.White
                     )
                 }
+                if (lastReade.isNullOrEmpty()) {
+                    Toast.makeText(
+                        LocalContext.current,
+                        "Perlu dipanggil di background",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    val terakhir = lastReade.last()
 
-                Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "Bukhari", style = MaterialTheme.typography.h2, color = Color.White)
-                Text(text = "No. 1", style = MaterialTheme.typography.body1, color = Color.White)
+                    if (terakhir.isNullOrEmpty()) {
+                        Toast.makeText(LocalContext.current, "Tunggu dulu", Toast.LENGTH_SHORT)
+                            .show()
+                    } else {
+
+                        Spacer(modifier = Modifier.height(20.dp))
+                        val getasik = getLast(terakhir)
+                        Text(
+                            text = "${getasik?.id}",
+                            style = MaterialTheme.typography.h2,
+                            color = Color.White
+                        )
+                        Text(
+                            text = "No. ${getasik?.number}",
+                            style = MaterialTheme.typography.body1,
+                            color = Color.White
+                        )
+                    }
+                }
             }
             Image(
                 painter = painterResource(id = R.drawable.quran),
@@ -75,4 +109,14 @@ fun CardRecentRead(
             )
         }
     }
+
+}
+
+
+fun <T> getLast(list: List<T>): T? {
+    var lastItem: T? = null
+    for (e in list) {
+        lastItem = e
+    }
+    return lastItem
 }

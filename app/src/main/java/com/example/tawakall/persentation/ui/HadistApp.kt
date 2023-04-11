@@ -1,5 +1,6 @@
 package com.example.tawakall.persentation.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -94,6 +95,7 @@ fun HadistApp(
                     scope.launch(Dispatchers.IO) {
                         vIewModel.insertRead(read)
                     }
+                    Toast.makeText(current, "Add to Last Read", Toast.LENGTH_SHORT).show()
                 })
             }
         }
