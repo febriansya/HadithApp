@@ -37,8 +37,6 @@ fun HomeScreen(
     var searchQuery by remember { mutableStateOf("") }
     var isSearchExpanded by remember { mutableStateOf(false) }
 
-    val last = viewModel.stateRead
-    Log.d("last", last.toString())
 
     Scaffold(
         modifier = modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp),

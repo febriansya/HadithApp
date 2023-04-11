@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "last")
 data class ReadHadith(
+//    @PrimaryKey(autoGenerate = true)
     @PrimaryKey
-    val id:String,
+    val id:Int,
+    val riwayah:String,
     val number:String,
 )
-
 class InvalidHadithException(message:String):Exception(message)

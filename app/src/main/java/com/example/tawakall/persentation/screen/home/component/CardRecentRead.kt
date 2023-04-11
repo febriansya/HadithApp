@@ -56,6 +56,14 @@ fun CardRecentRead(
                     )
                 )
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.quran),
+                contentDescription = null,
+                modifier = modifier
+                    .align(Alignment.BottomEnd)
+                    .width(206.dp)
+                    .height(126.dp)
+            )
             Column(modifier = modifier.padding(start = 20.dp, top = 19.dp)) {
                 Row() {
                     Image(
@@ -70,6 +78,7 @@ fun CardRecentRead(
                         color = Color.White
                     )
                 }
+
                 if (lastReade.isNullOrEmpty()) {
                     Toast.makeText(
                         LocalContext.current,
@@ -87,7 +96,7 @@ fun CardRecentRead(
                         Spacer(modifier = Modifier.height(20.dp))
                         val getasik = getLast(terakhir)
                         Text(
-                            text = "${getasik?.id}",
+                            text = "${getasik?.riwayah}",
                             style = MaterialTheme.typography.h2,
                             color = Color.White
                         )
@@ -99,17 +108,8 @@ fun CardRecentRead(
                     }
                 }
             }
-            Image(
-                painter = painterResource(id = R.drawable.quran),
-                contentDescription = null,
-                modifier = modifier
-                    .align(Alignment.BottomEnd)
-                    .width(206.dp)
-                    .height(126.dp)
-            )
         }
     }
-
 }
 
 

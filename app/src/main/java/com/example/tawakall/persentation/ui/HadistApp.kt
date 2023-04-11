@@ -91,7 +91,8 @@ fun HadistApp(
                 val scope = rememberCoroutineScope()
 
                 DetailScreen(nomor = number, arab = arab, terjemahan = id, onClickedFavorite = {
-                    val read = ReadHadith(riwayah, number)
+                    val read = ReadHadith(id=1,riwayah =riwayah, number =number)
+
                     scope.launch(Dispatchers.IO) {
                         vIewModel.insertRead(read)
                     }
