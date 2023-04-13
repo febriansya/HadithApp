@@ -89,14 +89,11 @@ fun HadistApp(
                 val riwayah = requireNotNull(arguments.getString("riwayah"))
 
                 val scope = rememberCoroutineScope()
-
                 DetailScreen(nomor = number, arab = arab, terjemahan = id, onClickedFavorite = {
                     val read = ReadHadith(id=1,riwayah =riwayah, number =number)
-
-                    scope.launch(Dispatchers.IO) {
+                    scope.launch {
                         vIewModel.insertRead(read)
                     }
-                    Toast.makeText(current, "Add to Last Read", Toast.LENGTH_SHORT).show()
                 })
             }
         }

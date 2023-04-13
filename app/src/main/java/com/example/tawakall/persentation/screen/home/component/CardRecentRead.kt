@@ -29,9 +29,7 @@ fun CardRecentRead(
 ) {
 
 
-    val lastReade = viewModel.stateRead
-    Log.d("3", "$lastReade")
-
+    val lastRead = viewModel.stateRead
 
     Column(
         modifier = modifier
@@ -78,34 +76,20 @@ fun CardRecentRead(
                         color = Color.White
                     )
                 }
-
-                if (lastReade.isNullOrEmpty()) {
-                    Toast.makeText(
-                        LocalContext.current,
-                        "Perlu dipanggil di background",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                Spacer(modifier = Modifier.height(20.dp))
+                if (lastRead.isEmpty()) {
                 } else {
-                    val terakhir = lastReade.last()
-
-                    if (terakhir.isNullOrEmpty()) {
-                        Toast.makeText(LocalContext.current, "Tunggu dulu", Toast.LENGTH_SHORT)
-                            .show()
-                    } else {
-
-                        Spacer(modifier = Modifier.height(20.dp))
-                        val getasik = getLast(terakhir)
-                        Text(
-                            text = "${getasik?.riwayah}",
-                            style = MaterialTheme.typography.h2,
-                            color = Color.White
-                        )
-                        Text(
-                            text = "No. ${getasik?.number}",
-                            style = MaterialTheme.typography.body1,
-                            color = Color.White
-                        )
-                    }
+                    val getasik = lastRead.last()
+                    Text(
+                        text = getasik[0].riwayah,
+                        style = MaterialTheme.typography.h2,
+                        color = Color.White
+                    )
+                    Text(
+                        text = "No. ${getasik[0].number}",
+                        style = MaterialTheme.typography.body1,
+                        color = Color.White
+                    )
                 }
             }
         }

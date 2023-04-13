@@ -85,7 +85,6 @@ fun ViewTabPager(
                 state = pagerState
             ) { page ->
                 when (page) {
-
                     0 -> {
                         LazyColumn {
                             state.riwayah?.let {

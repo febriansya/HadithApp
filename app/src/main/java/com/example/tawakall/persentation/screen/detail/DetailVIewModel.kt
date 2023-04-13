@@ -19,13 +19,11 @@ class DetailVIewModel @Inject constructor(
 //    berhasil add data ui state
 
     private var _state = mutableStateOf(DetailState())
-    val stateRead:State<DetailState> = _state
-    val scope = viewModelScope
+    val stateRead: State<DetailState> = _state
 
-    fun insertRead(readHadith: ReadHadith){
-        scope.launch {
+    fun insertRead(readHadith: ReadHadith) {
+        viewModelScope.launch {
             roomUseCase.insertHadithUseCase.invoke(readHadith)
         }
     }
-
 }

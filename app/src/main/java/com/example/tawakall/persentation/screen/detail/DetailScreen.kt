@@ -15,9 +15,6 @@ fun DetailScreen(
     terjemahan: String,
     onClickedFavorite: () -> Unit,
 ) {
-//    val state = viewModel.state.value
-//    val lastRead = LastRead(id = 1, nomor, arab)
-//    val context = LocalContext.current
     Column(modifier = modifier.fillMaxSize()) {
         ItemDetailScreen(
             nomor = nomor,
